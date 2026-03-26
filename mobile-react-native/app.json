@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "CardioIA Conversacional",
+    "slug": "cardioia-conversacional-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
