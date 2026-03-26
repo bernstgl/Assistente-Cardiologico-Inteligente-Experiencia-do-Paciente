@@ -1,0 +1,963 @@
+{
+  "name": "CardioIA_Assistente_Conversacional_Fase5",
+  "description": "Protótipo acadêmico de assistente cardiológico conversacional com foco em triagem inicial, explicação de exames e orientação básica ao paciente.",
+  "language": "pt-br",
+  "metadata": {
+    "project": "CardioIA",
+    "phase": "Fase 5 - Parte 1",
+    "author": "Thiago Lima Bernardes",
+    "rm": "560085",
+    "scope": "protótipo acadêmico",
+    "notes": [
+      "Não substitui avaliação médica",
+      "Usa intents, entities e dialog nodes",
+      "Preparado para integração com backend Flask"
+    ]
+  },
+  "learning_opt_out": true,
+  "counterexamples": [
+    {
+      "text": "qual foi o placar do jogo ontem"
+    },
+    {
+      "text": "me conta uma piada"
+    },
+    {
+      "text": "quero receita de bolo"
+    },
+    {
+      "text": "como investir em ações"
+    },
+    {
+      "text": "qual filme você recomenda"
+    }
+  ],
+  "intents": [
+    {
+      "intent": "saudacao",
+      "examples": [
+        {
+          "text": "oi"
+        },
+        {
+          "text": "olá"
+        },
+        {
+          "text": "ola"
+        },
+        {
+          "text": "bom dia"
+        },
+        {
+          "text": "boa tarde"
+        },
+        {
+          "text": "boa noite"
+        },
+        {
+          "text": "quero começar o atendimento"
+        }
+      ]
+    },
+    {
+      "intent": "emergencia",
+      "examples": [
+        {
+          "text": "estou com dor forte no peito"
+        },
+        {
+          "text": "estou com aperto no peito e falta de ar"
+        },
+        {
+          "text": "sinto dor no peito irradiando para o braço"
+        },
+        {
+          "text": "desmaiei e meu coração está acelerado"
+        },
+        {
+          "text": "estou passando mal com suor frio e dor no peito"
+        },
+        {
+          "text": "estou com falta de ar intensa agora"
+        }
+      ]
+    },
+    {
+      "intent": "informar_sintoma",
+      "examples": [
+        {
+          "text": "estou com palpitação"
+        },
+        {
+          "text": "meu coração fica acelerado às vezes"
+        },
+        {
+          "text": "estou com tontura"
+        },
+        {
+          "text": "sinto inchaço nas pernas"
+        },
+        {
+          "text": "ando muito cansado no esforço"
+        },
+        {
+          "text": "tenho falta de ar leve ao subir escadas"
+        },
+        {
+          "text": "quero entender um sintoma cardíaco"
+        }
+      ]
+    },
+    {
+      "intent": "informar_pressao",
+      "examples": [
+        {
+          "text": "minha pressão está alta"
+        },
+        {
+          "text": "a pressão deu baixa"
+        },
+        {
+          "text": "medi a pressão e deu 14 por 9"
+        },
+        {
+          "text": "minha pressão está normal"
+        },
+        {
+          "text": "pressão alta é perigosa"
+        },
+        {
+          "text": "quero ajuda para entender a pressão arterial"
+        }
+      ]
+    },
+    {
+      "intent": "explicar_exame",
+      "examples": [
+        {
+          "text": "o que é eletrocardiograma"
+        },
+        {
+          "text": "para que serve o ecocardiograma"
+        },
+        {
+          "text": "como funciona o holter"
+        },
+        {
+          "text": "o que o mapa de pressão avalia"
+        },
+        {
+          "text": "o raio x mostra problema no coração"
+        },
+        {
+          "text": "quero entender meus exames cardíacos"
+        }
+      ]
+    },
+    {
+      "intent": "medicamentos",
+      "examples": [
+        {
+          "text": "esqueci de tomar meu remédio"
+        },
+        {
+          "text": "posso parar o medicamento do coração"
+        },
+        {
+          "text": "meu remédio me deu tontura"
+        },
+        {
+          "text": "como lembrar de tomar os remédios"
+        },
+        {
+          "text": "tenho dúvida sobre medicamento cardíaco"
+        }
+      ]
+    },
+    {
+      "intent": "preparo_consulta",
+      "examples": [
+        {
+          "text": "como me preparar para a consulta"
+        },
+        {
+          "text": "o que levar no cardiologista"
+        },
+        {
+          "text": "como organizar meus exames"
+        },
+        {
+          "text": "o que devo anotar para a consulta"
+        },
+        {
+          "text": "quero me preparar para o atendimento"
+        }
+      ]
+    },
+    {
+      "intent": "habitos_saudaveis",
+      "examples": [
+        {
+          "text": "como cuidar melhor do coração"
+        },
+        {
+          "text": "reduzir sal ajuda"
+        },
+        {
+          "text": "posso fazer exercício"
+        },
+        {
+          "text": "quais hábitos saudáveis devo seguir"
+        },
+        {
+          "text": "como melhorar minha rotina para a saúde do coração"
+        }
+      ]
+    },
+    {
+      "intent": "agradecimento",
+      "examples": [
+        {
+          "text": "obrigado"
+        },
+        {
+          "text": "valeu"
+        },
+        {
+          "text": "agradeço"
+        },
+        {
+          "text": "muito obrigado"
+        },
+        {
+          "text": "ajudou bastante"
+        }
+      ]
+    },
+    {
+      "intent": "despedida",
+      "examples": [
+        {
+          "text": "tchau"
+        },
+        {
+          "text": "até mais"
+        },
+        {
+          "text": "encerrar atendimento"
+        },
+        {
+          "text": "podemos terminar"
+        },
+        {
+          "text": "fim"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sintoma",
+      "fuzzy_match": true,
+      "values": [
+        {
+          "value": "dor_no_peito",
+          "synonyms": [
+            "dor no peito",
+            "aperto no peito",
+            "pressão no peito"
+          ]
+        },
+        {
+          "value": "falta_de_ar",
+          "synonyms": [
+            "falta de ar",
+            "dificuldade para respirar",
+            "ar curto"
+          ]
+        },
+        {
+          "value": "palpitacao",
+          "synonyms": [
+            "palpitação",
+            "palpitacao",
+            "coração acelerado",
+            "batedeira"
+          ]
+        },
+        {
+          "value": "tontura",
+          "synonyms": [
+            "tontura",
+            "tonto",
+            "cabeça leve"
+          ]
+        },
+        {
+          "value": "edema",
+          "synonyms": [
+            "inchaço",
+            "inchaco",
+            "perna inchada",
+            "edema"
+          ]
+        },
+        {
+          "value": "desmaio",
+          "synonyms": [
+            "desmaio",
+            "desmaiei",
+            "apagão",
+            "apagamento"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "exame",
+      "fuzzy_match": true,
+      "values": [
+        {
+          "value": "eletrocardiograma",
+          "synonyms": [
+            "ecg",
+            "eletro"
+          ]
+        },
+        {
+          "value": "ecocardiograma",
+          "synonyms": [
+            "eco",
+            "ultrassom do coração"
+          ]
+        },
+        {
+          "value": "holter",
+          "synonyms": [
+            "holter 24h",
+            "monitor cardíaco"
+          ]
+        },
+        {
+          "value": "mapa",
+          "synonyms": [
+            "mapa 24h",
+            "monitor de pressão"
+          ]
+        },
+        {
+          "value": "raio_x_torax",
+          "synonyms": [
+            "raio x",
+            "raiox",
+            "radiografia de tórax"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "pressao_estado",
+      "fuzzy_match": true,
+      "values": [
+        {
+          "value": "alta",
+          "synonyms": [
+            "pressão alta",
+            "pressao alta",
+            "alta"
+          ]
+        },
+        {
+          "value": "baixa",
+          "synonyms": [
+            "pressão baixa",
+            "pressao baixa",
+            "baixa"
+          ]
+        },
+        {
+          "value": "normal",
+          "synonyms": [
+            "pressão normal",
+            "pressao normal",
+            "normal"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "habito",
+      "fuzzy_match": true,
+      "values": [
+        {
+          "value": "alimentacao",
+          "synonyms": [
+            "alimentação",
+            "alimentacao",
+            "comida",
+            "dieta"
+          ]
+        },
+        {
+          "value": "exercicio",
+          "synonyms": [
+            "atividade física",
+            "atividade fisica",
+            "exercício",
+            "exercicio"
+          ]
+        },
+        {
+          "value": "sono",
+          "synonyms": [
+            "sono",
+            "dormir",
+            "descanso"
+          ]
+        },
+        {
+          "value": "tabagismo",
+          "synonyms": [
+            "cigarro",
+            "fumar",
+            "tabagismo"
+          ]
+        },
+        {
+          "value": "estresse",
+          "synonyms": [
+            "estresse",
+            "stress",
+            "ansiedade"
+          ]
+        }
+      ]
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Boas-vindas",
+      "dialog_node": "node_welcome",
+      "conditions": "welcome",
+      "output": {
+        "text": {
+          "values": [
+            "Olá! Eu sou o protótipo do Assistente Cardiológico Conversacional do projeto CardioIA.\n\nPosso orientar sobre sintomas, pressão arterial, exames, medicamentos, preparo para consulta e hábitos saudáveis.\n\nImportante: eu não faço diagnóstico e não substituo avaliação médica."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "abertura",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Triagem de urgência",
+      "dialog_node": "node_emergencia",
+      "conditions": "#emergencia",
+      "previous_sibling": "node_welcome",
+      "output": {
+        "text": {
+          "values": [
+            "⚠️ Seus sinais descritos podem indicar urgência.\n\nSe houver dor no peito forte, falta de ar importante, desmaio, suor frio ou dor irradiando para braço, costas ou mandíbula, procure atendimento imediato.\n\nPosso ajudar a organizar as informações para você relatar ao profissional, mas a prioridade é buscar assistência agora."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "emergencia",
+        "nivel_urgencia": "alta"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Saudação",
+      "dialog_node": "node_saudacao",
+      "conditions": "#saudacao",
+      "previous_sibling": "node_emergencia",
+      "output": {
+        "text": {
+          "values": [
+            "Olá! Conte com poucas palavras o que você quer entender agora.\n\nExemplos: 'estou com palpitação', 'minha pressão está alta' ou 'o que é ecocardiograma?'."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "saudacao",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintomas - raiz",
+      "dialog_node": "node_sintomas",
+      "conditions": "#informar_sintoma",
+      "previous_sibling": "node_saudacao",
+      "output": {
+        "text": {
+          "values": [
+            "Entendi. Vou organizar a orientação conforme o sintoma citado."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintomas",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - dor no peito",
+      "dialog_node": "node_sintoma_dor_peito",
+      "parent": "node_sintomas",
+      "conditions": "@sintoma:dor_no_peito",
+      "output": {
+        "text": {
+          "values": [
+            "Dor ou aperto no peito sempre merece atenção.\n\nObserve quando começou, se piora com esforço, se irradia para braço ou mandíbula e se vem acompanhada de falta de ar, suor frio ou náusea.\n\nSe estiver intensa ou associada a esses sinais, trate como urgência."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_dor_peito",
+        "nivel_urgencia": "alta"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - palpitação",
+      "dialog_node": "node_sintoma_palpitacao",
+      "parent": "node_sintomas",
+      "conditions": "@sintoma:palpitacao",
+      "previous_sibling": "node_sintoma_dor_peito",
+      "output": {
+        "text": {
+          "values": [
+            "Palpitações podem acontecer por ansiedade, cafeína, esforço, febre ou alterações do ritmo cardíaco.\n\nAnote a frequência, a duração, o que você estava fazendo na hora e se houve tontura, desmaio ou dor no peito. Essas informações ajudam muito na consulta."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_palpitacao",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - falta de ar",
+      "dialog_node": "node_sintoma_falta_ar",
+      "parent": "node_sintomas",
+      "conditions": "@sintoma:falta_de_ar",
+      "previous_sibling": "node_sintoma_palpitacao",
+      "output": {
+        "text": {
+          "values": [
+            "Falta de ar pode ter várias causas, incluindo condições cardíacas, pulmonares e ansiedade.\n\nSe ela for intensa, surgir em repouso ou vier com dor no peito, chiado, desmaio ou coloração arroxeada, procure atendimento imediato."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_falta_ar",
+        "nivel_urgencia": "alta"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - tontura",
+      "dialog_node": "node_sintoma_tontura",
+      "parent": "node_sintomas",
+      "conditions": "@sintoma:tontura",
+      "previous_sibling": "node_sintoma_falta_ar",
+      "output": {
+        "text": {
+          "values": [
+            "Tontura pode se relacionar à pressão alterada, desidratação, medicamentos ou outras causas.\n\nSe ocorrer junto de desmaio, dor no peito ou falta de ar, isso aumenta a necessidade de avaliação rápida."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_tontura",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - edema",
+      "dialog_node": "node_sintoma_edema",
+      "parent": "node_sintomas",
+      "conditions": "@sintoma:edema",
+      "previous_sibling": "node_sintoma_tontura",
+      "output": {
+        "text": {
+          "values": [
+            "Inchaço nas pernas pode ter relação com retenção de líquidos, circulação venosa, rim, fígado ou coração.\n\nVale observar se é nos dois lados, se piora no fim do dia e se vem junto com cansaço ou falta de ar."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_edema",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma - genérico",
+      "dialog_node": "node_sintoma_generico",
+      "parent": "node_sintomas",
+      "conditions": "true",
+      "previous_sibling": "node_sintoma_edema",
+      "output": {
+        "text": {
+          "values": [
+            "Posso ajudar você a organizar o sintoma em três blocos: o que sente, quando começou e o que piora ou melhora.\n\nSe quiser, escreva nesses termos que eu estruturo a orientação inicial."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "sintoma_generico",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Pressão arterial - raiz",
+      "dialog_node": "node_pressao",
+      "conditions": "#informar_pressao",
+      "previous_sibling": "node_sintomas",
+      "output": {
+        "text": {
+          "values": [
+            "Certo. Vamos tratar da pressão arterial com uma orientação inicial e sem substituir avaliação profissional."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "pressao",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Pressão alta",
+      "dialog_node": "node_pressao_alta",
+      "parent": "node_pressao",
+      "conditions": "@pressao_estado:alta",
+      "output": {
+        "text": {
+          "values": [
+            "Pressão elevada merece acompanhamento.\n\nO ideal é repetir a medição após repouso, observar se o valor permanece alto e associar a presença de sintomas como dor no peito, dor de cabeça forte, falta de ar ou visão turva.\n\nSe houver sintomas intensos, busque avaliação imediata."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "pressao_alta",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Pressão baixa",
+      "dialog_node": "node_pressao_baixa",
+      "parent": "node_pressao",
+      "conditions": "@pressao_estado:baixa",
+      "previous_sibling": "node_pressao_alta",
+      "output": {
+        "text": {
+          "values": [
+            "Pressão baixa pode causar tontura, fraqueza e mal-estar.\n\nSe estiver sintomático, sente-se ou deite-se, hidrate-se e observe a evolução. Se houver desmaio, dor no peito ou piora importante, procure atendimento."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "pressao_baixa",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Pressão normal ou genérica",
+      "dialog_node": "node_pressao_generica",
+      "parent": "node_pressao",
+      "conditions": "true",
+      "previous_sibling": "node_pressao_baixa",
+      "output": {
+        "text": {
+          "values": [
+            "A interpretação da pressão arterial depende do histórico, da técnica de medida e do contexto clínico.\n\nUma boa prática é registrar horário, posição em que mediu, valor encontrado e sintomas presentes para discutir em consulta."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "pressao_generica",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exames - raiz",
+      "dialog_node": "node_exames",
+      "conditions": "#explicar_exame",
+      "previous_sibling": "node_pressao",
+      "output": {
+        "text": {
+          "values": [
+            "Claro. Vou explicar o exame em linguagem simples."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exames",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - ECG",
+      "dialog_node": "node_exame_ecg",
+      "parent": "node_exames",
+      "conditions": "@exame:eletrocardiograma",
+      "output": {
+        "text": {
+          "values": [
+            "O eletrocardiograma (ECG) registra a atividade elétrica do coração.\n\nEle ajuda a observar ritmo, frequência e possíveis alterações elétricas. É rápido, indolor e costuma ser usado como exame inicial."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_ecg",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - ecocardiograma",
+      "dialog_node": "node_exame_eco",
+      "parent": "node_exames",
+      "conditions": "@exame:ecocardiograma",
+      "previous_sibling": "node_exame_ecg",
+      "output": {
+        "text": {
+          "values": [
+            "O ecocardiograma usa ultrassom para mostrar as estruturas do coração em movimento.\n\nEle ajuda a avaliar válvulas, cavidades e a força do bombeamento."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_eco",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - Holter",
+      "dialog_node": "node_exame_holter",
+      "parent": "node_exames",
+      "conditions": "@exame:holter",
+      "previous_sibling": "node_exame_eco",
+      "output": {
+        "text": {
+          "values": [
+            "O Holter monitora os batimentos cardíacos por 24 horas ou mais.\n\nEle é útil para investigar palpitações, arritmias e sintomas que não aparecem durante um exame rápido."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_holter",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - MAPA",
+      "dialog_node": "node_exame_mapa",
+      "parent": "node_exames",
+      "conditions": "@exame:mapa",
+      "previous_sibling": "node_exame_holter",
+      "output": {
+        "text": {
+          "values": [
+            "O MAPA registra a pressão arterial ao longo do dia e da noite.\n\nEle ajuda a entender variações fora do consultório e pode complementar as medidas feitas em casa ou na clínica."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_mapa",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - raio-x",
+      "dialog_node": "node_exame_raiox",
+      "parent": "node_exames",
+      "conditions": "@exame:raio_x_torax",
+      "previous_sibling": "node_exame_mapa",
+      "output": {
+        "text": {
+          "values": [
+            "O raio-X de tórax pode ajudar a observar o tamanho do coração e sinais nos pulmões, mas não substitui exames específicos para função cardíaca.\n\nNo projeto CardioIA, ele também se conecta à trilha de visão computacional da Fase 4."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_raiox",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Exame - genérico",
+      "dialog_node": "node_exame_generico",
+      "parent": "node_exames",
+      "conditions": "true",
+      "previous_sibling": "node_exame_raiox",
+      "output": {
+        "text": {
+          "values": [
+            "Se quiser, escreva o nome do exame que eu explico de forma resumida: ECG, ecocardiograma, Holter, MAPA ou raio-X de tórax."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "exame_generico",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Medicamentos",
+      "dialog_node": "node_medicamentos",
+      "conditions": "#medicamentos",
+      "previous_sibling": "node_exames",
+      "output": {
+        "text": {
+          "values": [
+            "Não interrompa remédios cardíacos por conta própria.\n\nSe esqueceu uma dose ou percebeu efeito colateral, registre o nome do medicamento, a dose, o horário e o que sentiu. Essa organização ajuda o profissional a orientar a conduta correta."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "medicamentos",
+        "nivel_urgencia": "moderada"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Preparo para consulta",
+      "dialog_node": "node_preparo_consulta",
+      "conditions": "#preparo_consulta",
+      "previous_sibling": "node_medicamentos",
+      "output": {
+        "text": {
+          "values": [
+            "Para a consulta, vale levar:\n- exames recentes\n- lista dos medicamentos com dose e horário\n- sintomas anotados\n- valores de pressão, se você tiver\n- dúvidas que quer esclarecer\n\nIsso torna o atendimento mais objetivo e útil."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "preparo_consulta",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Hábitos saudáveis",
+      "dialog_node": "node_habitos",
+      "conditions": "#habitos_saudaveis",
+      "previous_sibling": "node_preparo_consulta",
+      "output": {
+        "text": {
+          "values": [
+            "Cuidar da saúde do coração envolve rotina.\n\nEm geral, vale observar alimentação equilibrada, controle do sal, atividade física orientada, sono adequado, não fumar, reduzir álcool quando indicado e seguir o plano terapêutico proposto pelo seu profissional de saúde."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "habitos",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Agradecimento",
+      "dialog_node": "node_agradecimento",
+      "conditions": "#agradecimento",
+      "previous_sibling": "node_habitos",
+      "output": {
+        "text": {
+          "values": [
+            "De nada! Quando quiser, posso continuar com sintomas, exames, pressão arterial, medicações ou preparo para consulta."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "agradecimento",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Despedida",
+      "dialog_node": "node_despedida",
+      "conditions": "#despedida",
+      "previous_sibling": "node_agradecimento",
+      "output": {
+        "text": {
+          "values": [
+            "Até mais! Cuide-se e lembre-se: se surgirem sinais de urgência, procure atendimento imediato."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "despedida",
+        "nivel_urgencia": "baixa"
+      }
+    },
+    {
+      "type": "standard",
+      "title": "Fallback",
+      "dialog_node": "node_anything_else",
+      "conditions": "anything_else",
+      "previous_sibling": "node_despedida",
+      "output": {
+        "text": {
+          "values": [
+            "Não entendi completamente sua solicitação.\n\nTente reformular em frases como:\n- 'estou com palpitação'\n- 'minha pressão está alta'\n- 'o que é ecocardiograma?'\n- 'como me preparar para a consulta?'\n\nSe você estiver em uma situação urgente, procure atendimento imediato."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {
+        "ultimo_tema": "fallback",
+        "nivel_urgencia": "baixa"
+      }
+    }
+  ]
+}
