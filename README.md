@@ -91,7 +91,7 @@ A solução entregue foi organizada em duas partes complementares:
 
 O fluxo principal do projeto segue a lógica:
 
-`USUÁRIO → INTERFACE (WEB/MOBILE) → BACKEND FLASK → WATSON ASSISTANT OU STUB LOCAL → RESPOSTA ESTRUTURADA → LOG EM SQLITE`
+`USUÁRIO > INTERFACE (WEB/MOBILE) > BACKEND FLASK > WATSON ASSISTANT OU STUB LOCAL > RESPOSTA ESTRUTURADA > LOG EM SQLITE`
 
 ### Etapas do funcionamento
 
