@@ -215,7 +215,7 @@ CardioIA_Fase5/
   config/
     ThiagoBernardes_rm560085_watson_assistant_export.json
   docs/
-    ThiagoBernardes_rm560085_Relatorio_CardioIA_Fase5_Parte1.docx
+    ThiagoBernardes_rm560085_Relatorio_CardioIA_Fase5.docx
   mobile-react-native/
     App.js
     README.md
